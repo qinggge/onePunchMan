@@ -238,15 +238,15 @@
     }
     
     .mouse {
-        background: #B07B6F;
-        border: 2px solid black;
-        width: 33px;
-        height: 12px;
-        border-radius: 50% / 0 0 100% 100%;
         position: absolute;
         bottom: 20%;
         left: 50%;
         margin-left: -16px;
+        background: #B07B6F;
+        width: 33px;
+        height: 12px;
+        border: 2px solid black;
+        border-radius: 50% / 0 0 100% 100%;
     }
     `
     writeCode('', code)
