@@ -1,6 +1,13 @@
 *{
   transition: all 0.5s;
 }
+body{
+    background: linear-gradient(to bottom, #92DAE1, #FFF);
+}
+pre{
+    word-wrap: break-word;
+    word-break: break-all;  
+}
 #code{
     position: absolute;
     background-color: rgba(255,255,255,0.5);
@@ -40,6 +47,7 @@ input[type=range]{
     position: absolute;
     left: -10px;
     top: 60px;
+    background: transparent;
 }
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -62,4 +70,92 @@ input[type=range]::-webkit-slider-thumb {
     border-radius: 50%; /*外观设置为圆形*/
     border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
     box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+}
+input[type=range]::before{
+    content: '快速';
+    display: block;
+    color: teal;
+    transform: rotate(90deg);
+}
+input[type=range]::after{
+    content: '慢速';
+    display: block;
+    color: teal;
+    transform: rotate(90deg);
+}
+.alert-wrapper{
+    position: absolute;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    display: none;
+}
+.alert-wrapper.active{
+    display: flex;
+}
+.alert{
+    width: 200px;
+    height: 300px;
+    background: white;
+    border: 1px solid #d7d7d7;
+    box-shadow: 1px 5px 1.125em #3b4547;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+.alert img{
+    width: 128px;
+    height: 128px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.alert p{
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 1em;
+}
+.alert button{
+    background: teal;
+    width: 150px;
+    color: white;
+    border: none;
+    height: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    outline: none;
+}
+#code.deactive{
+    display: none;
+}
+.mouse {
+    animation: smile 2s linear 0s infinite alternate;
+}
+@keyframes smile{
+    0%{
+        border-radius: 50%;
+    }
+    100%{
+        border-radius: 50% / 0 0 100% 100%;
+    }
+}
+.info{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+.info a,.info a:visited,.info a:hover,info a:focus{
+    color: teal;
+
+}
+.info.active{
+    display: block;
+}
+.info li{
+
 }

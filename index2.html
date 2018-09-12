@@ -1,23 +1,141 @@
-! function () {
-    let code = `/*
-    *  来访者，您好！
-    * 
-    *  我叫「 朱煌 」！
-    * 
-    *  很高兴您能抽出宝贵的时间来查看我的作品！
-    * 
-    *  这是我在空余时间做的一个CSS作品！
-    * 
-    *  希望您会喜欢！
-    * 
-    *  现在，我们开始吧！
-    */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+*{
+  transition: all 0.5s;
+}
+pre{
+    word-wrap: break-word;
+    word-break: break-all;  
+}
+#code{
+    position: absolute;
+    background-color: rgba(255,255,255,0.5);
+    overflow: hidden;
+    width: 100%;
+    top: 0;
+    height: 100%;
+}
+.head-wrapper{
+    flex: 1;
+    height: 100%;
+}
+.actions{
+    position: absolute;
+    top: 30px;
+    right: 100px;
+}
 
+.actions>button{
+    margin: 10px;
+    background: #DDD;
+    padding: 8px 10px;
+    border: none;
+}
 
-    /* 首先，初始化样式。 */
+.actions>button.active{
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8)
+}
 
-
-    * {
+.actions>button:focus{
+    outline: none;
+}
+input[type=range]{
+    transform: rotate3d(0,0,1,-90deg);
+    border-radius: 10px; 
+    -webkit-appearance: none;
+    position: absolute;
+    left: -10px;
+    top: 60px;
+    background: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}    
+input[type=range]::-webkit-slider-runnable-track {
+    height: 15px;
+    border-radius: 10px; /*将轨道设为圆角的*/
+    box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/
+    background: teal;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 25px;
+    width: 25px;
+    margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+    background: #ffffff; 
+    border-radius: 50%; /*外观设置为圆形*/
+    border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+    box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+}
+input[type=range]::before{
+    content: '快速';
+    display: block;
+    color: teal;
+    transform: rotate(90deg);
+}
+input[type=range]::after{
+    content: '慢速';
+    display: block;
+    color: teal;
+    transform: rotate(90deg);
+}
+.alert-wrapper{
+    position: absolute;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    display: none;
+}
+.alert-wrapper.active{
+    display: flex;
+}
+.alert{
+    width: 200px;
+    height: 300px;
+    background: white;
+    border: 1px solid #d7d7d7;
+    box-shadow: 1px 5px 1.125em #3b4547;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+.alert img{
+    width: 128px;
+    height: 128px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.alert p{
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 1em;
+}
+.alert button{
+    background: teal;
+    width: 150px;
+    color: white;
+    border: none;
+    height: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    outline: none;
+}
+* {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -25,6 +143,7 @@
     
     body {
         height: 100vh;
+        background: linear-gradient(to bottom, #92DAE1, #FFF);
         overflow: hidden;
     }
     
@@ -236,47 +355,44 @@
         height: 12px;
         border: 2px solid black;
         border-radius: 50% / 0 0 100% 100%;
+        animation: smile 2s linear 0s infinite alternate;
     }
-    `
-
-    let animationSpeed = 10
-    speed.onchange = function(e){
-        animationSpeed = e.currentTarget.value
-    }
-    function writeCode(prefix, code, fn) {
-        let container = document.querySelector('#code')
-        let styleTag = document.querySelector('#styleTag')
-        let n = 0
-        let id
-        id = setTimeout(function run() {
-            n += 1
-            container.innerHTML = code.substring(0, n)
-            styleTag.innerHTML = code.substring(0, n)
-            container.scrollTop = container.scrollHeight
-            if (n < code.length) {
-                id = setTimeout(run, animationSpeed)
-            } else {
-                fn && fn.call()
-            }
-        }, animationSpeed)
-    }
-    
-    function confirm(){
-        setTimeout(()=>{
-            alertWrapper.classList.add('active')
-            let confirm = document.querySelector('#confirm')
-            let code1 = document.querySelector('#code')
-            let info = document.querySelector('.info')
-            confirm.addEventListener('click',()=>{
-                alertWrapper.classList.remove('active')
-                code1.classList.add('deactive')
-                info.classList.add('active')
-            })
-        },3000)
+    @keyframes smile{
+        0%{
+            border-radius: 50%;
+        }
+        100%{
+            border-radius: 50% / 0 0 100% 100%;
+        }
     }
 
-    writeCode('', code,()=>{
-        confirm()
-    })
+</style>
+<body>
     
-}.call()
+        <div class="head-wrapper">
+                <main class="wrapper">
+                    <div class="head">
+                        <div class="blink"></div>
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="nose"></div>
+                        <div class="noseShadow"></div>
+                        <div class="mouse"></div>
+                        <div class="ear left"></div>
+                        <div class="ear right"></div>
+                    </div>
+                </main>
+            </div>
+        <pre id="code"></pre>
+        <div class="actions">
+            <input type="range" min="1" max="20" value="10" id="speed">
+        </div>
+        <div class="alert-wrapper" id="alertWrapper">
+            <div class="alert">
+                <img src="./onePunchMan.png">
+                <p>看看认真的琦玉老师吧！！</p>
+                <button id="confirm">确定</button>
+            </div>
+        </div>
+</body>
+</html>
