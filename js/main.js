@@ -1,24 +1,8 @@
 ! function () {
-    let duration = 10
-    $('.actions').on('click', 'button', function (e) {
-        let $button = $(e.currentTarget) // button
-        let speed = $button.attr('data-speed')
-        console.log(speed)
-        $button.addClass('active')
-            .siblings('.active').removeClass('active')
-        switch (speed) {
-            case 'slow':
-                duration = 20
-                break
-            case 'normal':
-                duration = 10
-                break
-            case 'fast':
-                duration = 1
-                break
-        }
-    })
-
+    let animationSpeed = 10
+    speed.onchange = function(e){
+        animationSpeed = e.currentTarget.value
+    }
     function writeCode(prefix, code, fn) {
         let container = document.querySelector('#code')
         let styleTag = document.querySelector('#styleTag')
@@ -30,14 +14,31 @@
             styleTag.innerHTML = code.substring(0, n)
             container.scrollTop = container.scrollHeight
             if (n < code.length) {
-                id = setTimeout(run, duration)
+                id = setTimeout(run, animationSpeed)
             } else {
                 fn && fn.call()
             }
-        }, duration)
+        }, animationSpeed)
     }
 
-    let code = `
+    let code = `/*
+    *  面试官，您好！
+    * 
+    *  我叫「 朱煌 」，拥有两年Web前端开发经验！
+    * 
+    *  很高兴您能抽出宝贵的时间来查看我的作品！
+    * 
+    *  这是我在空余时间做的一个CSS作品！
+    * 
+    *  希望您会喜欢！
+    * 
+    *  现在，我们开始吧！
+    */
+
+
+    /* 首先，初始化样式以及设置背景。 */
+
+
     * {
         margin: 0;
         padding: 0;
@@ -47,6 +48,7 @@
     body {
         height: 100vh;
         background: linear-gradient(to bottom, #92DAE1, #FFF);
+        overflow: hidden;
     }
     
     .wrapper {
@@ -56,6 +58,8 @@
         align-items: center;
     }
     
+    /* 接下来，画一颗椭圆的卤蛋（？） */
+
     .head {
         width: 208px;
         height: 308px;
@@ -67,6 +71,8 @@
         background: #E2B5A0;
         position: relative;
     }
+    
+    /* 需要两只耳朵 */
     
     .head::before,
     .head::after {
@@ -95,6 +101,8 @@
         transform: rotate(18deg);
     }
     
+    /* 给耳朵添加一点细节 */
+
     .ear {
         width: 16px;
         height: 28px;
@@ -104,22 +112,22 @@
         z-index: -1;
         border: 2px solid #0C0807;
         border-bottom: 0;
+        border-top-left-radius: 100% 120%;
+        border-top-right-radius: 100% 120%;
     }
     
     .ear.left {
         left: -10px;
-        border-top-left-radius: 100% 120%;
-        border-top-right-radius: 100% 120%;
         transform: rotate(-10deg);
     }
     
     .ear.right {
         right: -10px;
-        border-top-left-radius: 100% 120%;
-        border-top-right-radius: 100% 120%;
         transform: rotate(10deg);
     }
     
+    /* 光头总是会反光的 */
+
     .blink {
         width: 25px;
         height: 45px;
@@ -131,6 +139,8 @@
         transform: rotate(-25deg);
     }
     
+    /* 画两只呆滞无神的眼睛 */
+
     .eye {
         width: 57px;
         height: 30px;
@@ -205,25 +215,9 @@
         box-shadow: -1px 0px 5px 2px #A97462;
         border-top-right-radius: 98% 50%;
         border-bottom-right-radius: 98% 50%;
-        z-index: 1;
     }
     
     .nose::before {
-        content: '';
-        display: block;
-        position: absolute;
-        border-top: 5px solid transparent;
-        border-left: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        border-right: 3px solid black;
-        border-radius: 20px 30px 30px 40px;
-        bottom: -10px;
-        left: -4px;
-        z-index: 2;
-        transform: rotate(-34deg);
-    }
-    
-    .nose::after {
         content: '';
         display: block;
         width: 1px;
@@ -235,6 +229,20 @@
         bottom: -7px;
         left: 4px;
         box-shadow: -3px -2px 5px 3px #A97462;
+    }
+    
+    .nose::after {
+        content: '';
+        display: block;
+        position: absolute;
+        border-width: 5px 3px 5px 5px;
+        border-color: transparent;
+        border-right-color: black;
+        border-style: solid;
+        border-radius: 20px 30px 30px 40px;
+        bottom: -10px;
+        left: -4px;
+        transform: rotate(-34deg);
     }
     
     .mouse {

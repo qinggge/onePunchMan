@@ -2,20 +2,21 @@
   transition: all 0.5s;
 }
 #code{
-    flex: 1;
-    height: 50%;
+    position: absolute;
+    background-color: rgba(255,255,255,0.5);
     overflow: hidden;
+    width: 100%;
+    top: 0;
+    height: 100%;
 }
 .head-wrapper{
     flex: 1;
-    height: 50%;
+    height: 100%;
 }
 .actions{
     position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
+    top: 30px;
+    right: 100px;
 }
 
 .actions>button{
@@ -31,4 +32,34 @@
 
 .actions>button:focus{
     outline: none;
+}
+input[type=range]{
+    transform: rotate3d(0,0,1,-90deg);
+    border-radius: 10px; 
+    -webkit-appearance: none;
+    position: absolute;
+    left: -10px;
+    top: 60px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}    
+input[type=range]::-webkit-slider-runnable-track {
+    height: 15px;
+    border-radius: 10px; /*将轨道设为圆角的*/
+    box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/
+    background: teal;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 25px;
+    width: 25px;
+    margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+    background: #ffffff; 
+    border-radius: 50%; /*外观设置为圆形*/
+    border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+    box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
 }
